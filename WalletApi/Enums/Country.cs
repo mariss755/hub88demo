@@ -1,5 +1,9 @@
-﻿namespace WalletApi
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+namespace WalletApi
 {
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum Country
     {
         XX, AD, AE, AF, AG, AI, AL, AM, AO, AQ, AR, AS, AT, AU, AW, AX, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BL, BM, 
