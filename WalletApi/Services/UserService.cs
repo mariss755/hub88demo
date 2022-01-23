@@ -28,13 +28,13 @@ namespace WalletApi.Services
             };
         }
         
-        public UserBalanceDto GetUserBalance(RequestUserInfoDto requestUserInfoDto)
+        public UserBalanceDto GetUserBalance(RequestUserInfoDto requestUserInfoDto, Status status = Status.RS_OK)
         {
             var user = _context.Users.SingleOrDefault(u => u.UserName == requestUserInfoDto.UserName);
 
             if (user != null)
             {
-                return user.AsBalanceDto(requestUserInfoDto.RequestUuid, Status.RS_OK);
+                return user.AsBalanceDto(requestUserInfoDto.RequestUuid, status);
             }
             return new UserBalanceDto {
                 RequestUuid = requestUserInfoDto.RequestUuid,
