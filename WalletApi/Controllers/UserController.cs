@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WalletApi.DAOs;
 using WalletApi.DTOs;
+using WalletApi.Services;
 
 namespace WalletApi.Controllers
 {
@@ -18,9 +18,8 @@ namespace WalletApi.Controllers
         [HttpPost("info")]
         public ActionResult<UserInfoDto> UserInfo([FromBody] RequestUserInfoDto requestUserInfoDto)
         {
-
             return _userService.GetUser(requestUserInfoDto);
-            
+
         }
 
         [HttpPost("balance")]

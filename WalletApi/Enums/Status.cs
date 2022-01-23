@@ -1,4 +1,4 @@
-﻿namespace WalletApi
+﻿namespace WalletApi.Enums
 {
     public enum Status
     {
@@ -6,7 +6,8 @@
         RS_ERROR_UNKNOWN, 
         RS_ERROR_INVALID_PARTNER, 
         RS_ERROR_INVALID_TOKEN, 
-        RS_ERROR_INVALID_GAMERS_ERROR_WRONG_CURRENCY, 
+        RS_ERROR_INVALID_GAMERS,
+        ERROR_WRONG_CURRENCY, 
         RS_ERROR_NOT_ENOUGH_MONEY, 
         RS_ERROR_USER_DISABLED, 
         RS_ERROR_INVALID_SIGNATURE, 

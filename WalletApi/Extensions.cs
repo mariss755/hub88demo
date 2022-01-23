@@ -1,6 +1,7 @@
 ﻿using System;
 using WalletApi.DTOs;
 using WalletApi.Entities;
+using WalletApi.Enums;
 
 namespace WalletApi
 {

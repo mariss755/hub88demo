@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using WalletApi.DAL;
 using WalletApi.DTOs;
-using WalletApi.Entities;
+using WalletApi.Enums;
 
-namespace WalletApi.DAOs
+namespace WalletApi.Services
 {
     public class UserService
     {

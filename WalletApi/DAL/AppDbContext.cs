@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using WalletApi.Entities;
+using WalletApi.Enums;
 
 namespace WalletApi.DAL
 {

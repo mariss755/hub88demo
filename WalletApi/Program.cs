@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WalletApi.DAL;
-using WalletApi.DAOs;
+using WalletApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

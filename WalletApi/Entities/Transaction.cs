@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.SignalR;
+using WalletApi.Enums;
 
 namespace WalletApi.Entities
 {

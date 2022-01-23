@@ -1,4 +1,4 @@
-﻿namespace WalletApi
+﻿namespace WalletApi.Enums
 {
     public enum TransactionKind
     {

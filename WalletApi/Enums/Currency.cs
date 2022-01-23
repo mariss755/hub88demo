@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-
-namespace WalletApi
+﻿namespace WalletApi.Enums
 {
     public enum Currency
     {
