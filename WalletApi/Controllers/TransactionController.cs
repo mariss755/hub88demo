@@ -35,13 +35,25 @@ namespace WalletApi.Controllers
         {
             var response = _transactionService.DecreaseUserBalance(transactionBetDto);
             
-            var trans = _userService.GetUserBalance(new RequestUserInfoDto
+            return _userService.GetUserBalance(new RequestUserInfoDto
                 {
                     RequestUuid = transactionBetDto.RequestUuid, 
                     UserName = transactionBetDto.UserName
                 }, 
                 response);
-            return trans;
+        }
+
+        [HttpPost("rollback")]
+        public ActionResult<UserBalanceDto> TransactionRollback(TransactionRollbackDto transactionRollbackDto)
+        {
+            var response = _transactionService.RollbackTransaction(transactionRollbackDto);
+            
+            return _userService.GetUserBalance(new RequestUserInfoDto
+                {
+                    RequestUuid = transactionRollbackDto.RequestUuid, 
+                    UserName = transactionRollbackDto.UserName
+                }, 
+                response);
         }
     }
 }

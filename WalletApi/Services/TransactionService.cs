@@ -30,23 +30,26 @@ namespace WalletApi.Services
                 return error;
             }
 
-            user!.Transactions!.Add(new Transaction
+            var transaction = new Transaction
             {
                 Id = new Guid(transactionWinDto.TransactionUuid),
                 Amount = transactionWinDto.Amount,
-                Currency = transactionWinDto.Currency,
+                Currency = (Currency) Enum.Parse(typeof(Currency), transactionWinDto.Currency),
                 InsertedAt = DateTime.Now,
                 Kind = TransactionKind.TK_WIN,
-                ReferenceTransactionId = new Guid(transactionWinDto.ReferenceTransationUuid),
-                UserId = user.Id
-            });
+                ReferenceTransactionId = new Guid(transactionWinDto.ReferenceTransactionUuid),
+                UserId = user!.Id
+            };
+
+            user!.Transactions!.Add(transaction);
             user.Balance += transactionWinDto.Amount;
+            
+            _context.Transactions.Add(transaction);
             _context.Users.Update(user);
             _context.SaveChanges();
             
             return Status.RS_OK;
-
-
+            
         }
 
         private bool TransactionExists(string transactionUuid)
@@ -89,6 +92,54 @@ namespace WalletApi.Services
             return Status.RS_OK;
             
         }
+        
+        public Status RollbackTransaction(TransactionRollbackDto transactionRollbackDto)
+        {
+            var user = _context.Users
+                .Include(usr => usr.Transactions)
+                .SingleOrDefault(u => u.UserName == transactionRollbackDto.UserName);
+            
+            var error = CheckTransactionRollbackErrors(user, transactionRollbackDto);
+
+            if (error != Status.RS_OK)
+            {
+                return error;
+            }
+
+            var transactionToRollback = user!.Transactions!
+                    .SingleOrDefault(t => t.Id == new Guid(transactionRollbackDto.ReferenceTransationUuid));
+            
+            if (transactionToRollback != null)
+            {
+                if (transactionToRollback.Kind == TransactionKind.TK_BET)
+                {
+                    user.Balance += transactionToRollback.Amount;
+                } else if (transactionToRollback.Kind == TransactionKind.TK_WIN)
+                {
+                    user.Balance -= transactionToRollback.Amount;
+                }
+
+                _context.Transactions.Remove(transactionToRollback);
+                _context.Users.Update(user);
+                _context.SaveChanges();
+            }
+            return Status.RS_OK;
+
+        }
+
+        private Status CheckTransactionRollbackErrors(User? user, TransactionRollbackDto transactionRollbackDto)
+        {
+            if (user == null)
+            {
+                return Status.RS_ERROR_UNKNOWN;
+            }
+            if (TransactionExists(transactionRollbackDto.TransactionUuid))
+            {
+                return Status.RS_ERROR_DUPLICATE_TRANSACTION;
+            }
+            
+            return Status.RS_OK;
+        }
 
         private Status CheckTransactionWinErrors(User? user, TransactionWinDto transactionWinDto)
         {
@@ -102,12 +153,12 @@ namespace WalletApi.Services
                 return Status.RS_ERROR_DUPLICATE_TRANSACTION;
             }
 
-            if (transactionWinDto.Currency != user.Currency)
+            if (transactionWinDto.Currency != user.Currency.ToString())
             {
                 return Status.RS_ERROR_WRONG_CURRENCY;
             }
 
-            if (!TransactionExists(transactionWinDto.ReferenceTransationUuid))
+            if (!TransactionExists(transactionWinDto.ReferenceTransactionUuid))
             {
                 return Status.RS_ERROR_TRANSACTION_DOES_NOT_EXIST;
             }
@@ -139,5 +190,7 @@ namespace WalletApi.Services
 
             return Status.RS_OK;
         }
+
+        
     }
 }

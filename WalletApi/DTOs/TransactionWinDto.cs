@@ -5,18 +5,18 @@ namespace WalletApi.DTOs
 {
     public class TransactionWinDto
     {
-        [JsonPropertyName("user")]
-        public string UserName { get; set; }
+        [JsonPropertyName("user")] 
+        public string UserName { get; set; } = default!;
         [JsonPropertyName("transaction_uuid")]
-        public string TransactionUuid { get; set; }
+        public string TransactionUuid { get; set; } = default!;
         [JsonPropertyName("request_uuid")]
-        public string RequestUuid { get; set; }
+        public string RequestUuid { get; set; } = default!;
         [JsonPropertyName("reference_transaction_uuid")]
-        public string ReferenceTransationUuid { get; set; }
+        public string ReferenceTransactionUuid { get; set; } = default!;
         [JsonPropertyName("currency")] 
-        public Currency Currency { get; set; }
+        public string Currency { get; set; } = default!;
         [JsonPropertyName("amount")]
-        public int Amount { get; set; }
+        public int Amount { get; set; } = default!;
         
     }
 }
