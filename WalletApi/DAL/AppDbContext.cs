@@ -9,8 +9,6 @@ namespace WalletApi.DAL
     {
         public AppDbContext(DbContextOptions<AppDbContext> options): base(options)
         {
-            
-        
         }
 
         public DbSet<User> Users { get; set; } = default!;
@@ -51,6 +49,5 @@ namespace WalletApi.DAL
                     UserId = Guid.Parse("ca65ca5e-3e01-4693-9324-69ade8268292")
                 });
         }
-
     }
 }

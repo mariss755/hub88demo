@@ -18,7 +18,6 @@ namespace WalletApi.Services
     public class TransactionService : ITransactionService
     {
         private readonly AppDbContext _context;
-        
         public TransactionService(AppDbContext context)
         {
             _context = context;
@@ -56,13 +55,12 @@ namespace WalletApi.Services
             _context.SaveChanges();
             
             return Status.RS_OK;
-            
         }
 
         private bool TransactionExists(string transactionUuid)
         {
             var transaction = _context.Transactions.SingleOrDefault(t => t.Id == new Guid(transactionUuid));
-
+            
             return transaction != null;
         }
 
@@ -97,7 +95,6 @@ namespace WalletApi.Services
             _context.SaveChanges();
             
             return Status.RS_OK;
-            
         }
         
         public Status RollbackTransaction(TransactionRollbackDto transactionRollbackDto)
@@ -131,7 +128,6 @@ namespace WalletApi.Services
                 _context.SaveChanges();
             }
             return Status.RS_OK;
-
         }
 
         private Status CheckTransactionRollbackErrors(User? user, TransactionRollbackDto transactionRollbackDto)
@@ -197,7 +193,5 @@ namespace WalletApi.Services
 
             return Status.RS_OK;
         }
-
-        
     }
 }

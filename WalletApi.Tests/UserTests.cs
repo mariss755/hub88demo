@@ -56,10 +56,11 @@ namespace WalletApi.Tests
                 UserName = "testUser1"
             };
             
-            _userServiceMock.Setup(x => x.GetUser(requestDto)).Returns((UserInfoDto)null);
+            _userServiceMock.Setup(x => x.GetUser(requestDto)).Returns((UserInfoDto)null!);
             
             // Act
             var result = _sut.UserInfo(requestDto);
+            
             // Assert
             result.Value.Should().BeNull();
         }

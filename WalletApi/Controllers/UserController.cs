@@ -18,9 +18,7 @@ namespace WalletApi.Controllers
         [HttpPost("info")]
         public ActionResult<UserInfoDto> UserInfo(RequestUserInfoDto requestUserInfoDto)
         {
-            var foo = requestUserInfoDto;
             return _userService.GetUser(requestUserInfoDto);
-
         }
 
         [HttpPost("balance")]

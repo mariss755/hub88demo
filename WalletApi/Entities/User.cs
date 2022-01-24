@@ -16,7 +16,6 @@ namespace WalletApi.Entities
         public int Balance { get; set; }
         public Country Country { get; set; }
         public Currency Currency { get; set; }
-
         public List<Transaction>? Transactions { get; set; }
         
     }

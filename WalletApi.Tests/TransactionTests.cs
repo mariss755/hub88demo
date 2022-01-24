@@ -10,19 +10,17 @@ namespace WalletApi.Tests
 {
     public class TransactionTests
     {
-        
         private readonly TransactionController _sut;
         private readonly Mock<IUserService> _userServiceMock;
         private readonly Mock<ITransactionService> _transactionServiceMock;
-
+        
         public TransactionTests()
         {
             _userServiceMock = new Mock<IUserService>();
             _transactionServiceMock = new Mock<ITransactionService>();
             _sut = new TransactionController(_transactionServiceMock.Object, _userServiceMock.Object);
         }
-        
-        
+
         [Fact]
         public void Transaction_bet_returns_user_balance()
         {
@@ -61,9 +59,7 @@ namespace WalletApi.Tests
             var result = _sut.TransactionBet(transactionDto);
 
             // Assert
-
             result.Value.Should().Be(userBalanceDto);
-            
         }
 
         [Fact]
@@ -105,7 +101,6 @@ namespace WalletApi.Tests
             var result = _sut.TransactionWin(transactionDto);
 
             // Assert
-
             result.Value.Should().Be(userBalanceDto);
         }
 
@@ -146,7 +141,6 @@ namespace WalletApi.Tests
             var result = _sut.TransactionRollback(transactionDto);
 
             // Assert
-
             result.Value.Should().Be(userBalanceDto);
         }
     }

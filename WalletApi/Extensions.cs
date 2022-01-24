@@ -1,5 +1,4 @@
-﻿using System;
-using WalletApi.DTOs;
+﻿using WalletApi.DTOs;
 using WalletApi.Entities;
 using WalletApi.Enums;
 
@@ -9,7 +8,7 @@ namespace WalletApi
     {
         public static UserInfoDto AsDto(this User user, string requestGuid, Status status)
         {
-            return new UserInfoDto
+            return new()
             {
                 User = user.UserName,
                 BirthDate = user.BirthDate.ToString("yyyy-MM-dd"),
@@ -22,7 +21,7 @@ namespace WalletApi
 
         public static UserBalanceDto AsBalanceDto(this User user, string requestGuid, Status status)
         {
-            return new UserBalanceDto()
+            return new()
             {
                 User = user.UserName,
                 Status = status.ToString(),

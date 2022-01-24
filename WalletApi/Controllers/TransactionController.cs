@@ -26,8 +26,7 @@ namespace WalletApi.Controllers
             {
                 RequestUuid = transactionWinDto.RequestUuid, 
                 UserName = transactionWinDto.UserName
-            }, 
-                response);
+            }, response);
         }
 
         [HttpPost("bet")]
@@ -39,8 +38,7 @@ namespace WalletApi.Controllers
                 {
                     RequestUuid = transactionBetDto.RequestUuid, 
                     UserName = transactionBetDto.UserName
-                }, 
-                response);
+                }, response);
         }
 
         [HttpPost("rollback")]
@@ -52,8 +50,7 @@ namespace WalletApi.Controllers
                 {
                     RequestUuid = transactionRollbackDto.RequestUuid, 
                     UserName = transactionRollbackDto.UserName
-                }, 
-                response);
+                }, response);
         }
     }
 }
