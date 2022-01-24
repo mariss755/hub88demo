@@ -18,8 +18,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<UserService>()
-    .AddScoped<TransactionService>();
+builder.Services.AddScoped<IUserService, UserService>()
+    .AddScoped<ITransactionService, TransactionService>();
 
 var app = builder.Build();
 

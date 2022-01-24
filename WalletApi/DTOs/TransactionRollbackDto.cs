@@ -11,6 +11,6 @@ namespace WalletApi.DTOs
         [JsonPropertyName("request_uuid")]
         public string RequestUuid { get; set; } = default!;
         [JsonPropertyName("reference_transaction_uuid")]
-        public string ReferenceTransationUuid { get; set; } = default!;
+        public string ReferenceTransactionUuid { get; set; } = default!;
     }
 }

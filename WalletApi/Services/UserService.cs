@@ -5,7 +5,13 @@ using WalletApi.Enums;
 
 namespace WalletApi.Services
 {
-    public class UserService
+    public interface IUserService
+    {
+        UserInfoDto GetUser(RequestUserInfoDto requestUserInfoDto);
+        UserBalanceDto GetUserBalance(RequestUserInfoDto requestUserInfoDto, Status status = Status.RS_OK);
+    }
+
+    public class UserService : IUserService
     {
         private readonly AppDbContext _context;
         public UserService(AppDbContext context)

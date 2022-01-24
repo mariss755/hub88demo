@@ -8,7 +8,14 @@ using WalletApi.Enums;
 
 namespace WalletApi.Services
 {
-    public class TransactionService
+    public interface ITransactionService
+    {
+        Status IncreaseUserBalance(TransactionWinDto transactionWinDto);
+        Status DecreaseUserBalance(TransactionBetDto transactionBetDto);
+        Status RollbackTransaction(TransactionRollbackDto transactionRollbackDto);
+    }
+
+    public class TransactionService : ITransactionService
     {
         private readonly AppDbContext _context;
         
@@ -79,7 +86,7 @@ namespace WalletApi.Services
                 Currency = (Currency) Enum.Parse(typeof(Currency), transactionBetDto.Currency),
                 InsertedAt = DateTime.Now,
                 Kind = TransactionKind.TK_BET,
-                UserId = user.Id
+                UserId = user!.Id
             };
             user!.Transactions!.Add(transaction);
             
@@ -107,7 +114,7 @@ namespace WalletApi.Services
             }
 
             var transactionToRollback = user!.Transactions!
-                    .SingleOrDefault(t => t.Id == new Guid(transactionRollbackDto.ReferenceTransationUuid));
+                    .SingleOrDefault(t => t.Id == new Guid(transactionRollbackDto.ReferenceTransactionUuid));
             
             if (transactionToRollback != null)
             {

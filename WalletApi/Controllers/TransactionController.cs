@@ -8,10 +8,10 @@ namespace WalletApi.Controllers
     [Route("transaction")]
     public class TransactionController : ControllerBase
     {
-        private readonly TransactionService _transactionService;
-        private readonly UserService _userService;
+        private readonly ITransactionService _transactionService;
+        private readonly IUserService _userService;
         
-        public TransactionController(TransactionService transactionService, UserService userService)
+        public TransactionController(ITransactionService transactionService, IUserService userService)
         {
             _transactionService = transactionService;
             _userService = userService;
